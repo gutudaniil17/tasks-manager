@@ -28,7 +28,7 @@
     </scm>
     <properties>
         <java.version>17</java.version>
-        <swagger.spec1>./swagger/api_spec.yaml</swagger.spec1>
+        <swagger.spec1>${project.basedir}/src/main/resources/swagger/api_spec.yaml</swagger.spec1>
         <swagger.generated.package.prefix>com.gutu.tasksmanager.models</swagger.generated.package.prefix>
     </properties>
 

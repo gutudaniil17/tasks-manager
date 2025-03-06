@@ -3,11 +3,13 @@ package com.gutu.tasksmanager.controller;
 import com.gutu.tasksmanager.models.model.CreateUpdateTaskRequest;
 import com.gutu.tasksmanager.models.model.TaskWithDetails;
 import com.gutu.tasksmanager.service.ITaskService;
+import com.gutu.tasksmanager.utils.TaskRequestValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -30,6 +32,9 @@ class TaskControllerTest {
 
     @InjectMocks
     private TaskController taskController;
+
+    @Mock
+    private TaskRequestValidator taskRequestValidator;
 
     @BeforeEach
     void setUp() {
