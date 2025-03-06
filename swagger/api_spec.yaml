@@ -20,6 +20,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskWithDetails'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     get:
       summary: Retrieve a list of all tasks
       responses:
@@ -70,6 +76,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskWithDetails'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
           description: Task not found
     delete:
@@ -124,11 +136,18 @@ components:
               format: int64
               description: The unique identifier of the task
               example: 1
-            createdAt:
+            created_at:
               type: string
               format: date-time
               description: The creation timestamp of the task
-            updatedAt:
+            updated_at:
               type: string
               format: date-time
               description: The last update timestamp of the task
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message

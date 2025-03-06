@@ -3,8 +3,7 @@ package com.gutu.tasksmanager.controller;
 import com.gutu.tasksmanager.models.model.CreateUpdateTaskRequest;
 import com.gutu.tasksmanager.models.model.TaskWithDetails;
 import com.gutu.tasksmanager.service.ITaskService;
-import lombok.AllArgsConstructor;
-import org.springframework.http.MediaType;
+import com.gutu.tasksmanager.utils.TaskRequestValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +25,14 @@ public class TaskController {
      */
     private final ITaskService taskService;
 
-    public TaskController(ITaskService taskService) {
+    /**
+     * The taskRequestValidator field is used to validate task requests.
+     */
+    private final TaskRequestValidator taskRequestValidator;
+
+    public TaskController(ITaskService taskService, TaskRequestValidator taskRequestValidator) {
         this.taskService = taskService;
+        this.taskRequestValidator = taskRequestValidator;
     }
 
     /**
@@ -38,6 +43,7 @@ public class TaskController {
      */
     @PostMapping
     public ResponseEntity<TaskWithDetails> createTask(@RequestBody CreateUpdateTaskRequest request) {
+        taskRequestValidator.validateCreateRequest(request);
         return ResponseEntity.status(201).body(taskService.createTask(request));
     }
 
@@ -72,6 +78,7 @@ public class TaskController {
      */
     @PutMapping(value = "/{id}")
     public ResponseEntity<TaskWithDetails> updateTask(@PathVariable Long id, @RequestBody CreateUpdateTaskRequest request) {
+        taskRequestValidator.validateUpdateRequest(id, request);
         TaskWithDetails task = taskService.updateTask(id, request);
         return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
     }

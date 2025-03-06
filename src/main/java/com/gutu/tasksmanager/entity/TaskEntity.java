@@ -7,6 +7,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.OffsetDateTime;
 
+/**
+ * TaskEntity class is an entity class that represents a task in the database.
+ * It is used to map the task details to the database table.
+ *
+ * @author gutu.daniil
+ * @version 1.0
+ * @since 06.03.2025
+ */
 @Entity
 @Table(name = "tasks")
 public class TaskEntity {
