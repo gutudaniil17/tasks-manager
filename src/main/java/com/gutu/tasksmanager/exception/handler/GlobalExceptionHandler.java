@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * GlobalExceptionHandler class is used to handle exceptions globally.
+ *
+ * @author gutu.daniil
+ * @version 1.0
+ * @since 06.03.2025
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
