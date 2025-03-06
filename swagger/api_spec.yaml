@@ -1,0 +1,134 @@
+openapi: 3.0.1
+info:
+  title: Tasks Manager API
+  description: API documentation for the Tasks Manager application
+  version: 1.0.0
+paths:
+  /tasks:
+    post:
+      summary: Create a new task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpdateTaskRequest'
+      responses:
+        '201':
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskWithDetails'
+    get:
+      summary: Retrieve a list of all tasks
+      responses:
+        '200':
+          description: A list of tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskWithDetails'
+  /tasks/{id}:
+    get:
+      summary: Retrieve a single task by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskWithDetails'
+        '404':
+          description: Task not found
+    put:
+      summary: Update an existing task by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpdateTaskRequest'
+      responses:
+        '200':
+          description: Task updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskWithDetails'
+        '404':
+          description: Task not found
+    delete:
+      summary: Delete a task by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Task deleted successfully
+        '404':
+          description: Task not found
+
+components:
+  schemas:
+    SimpleTask:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the task
+          example: Wash the dishes
+        description:
+          type: string
+          description: A description of the task
+          example: Wash all the dirty dishes in the sink
+        status:
+          type: string
+          enum:
+            - TODO
+            - IN_PROGRESS
+            - DONE
+      required:
+        - title
+        - description
+        - status
+
+    CreateUpdateTaskRequest:
+      allOf:
+        - $ref: '#/components/schemas/SimpleTask'
+
+    TaskWithDetails:
+      allOf:
+        - $ref: '#/components/schemas/SimpleTask'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              description: The unique identifier of the task
+              example: 1
+            createdAt:
+              type: string
+              format: date-time
+              description: The creation timestamp of the task
+            updatedAt:
+              type: string
+              format: date-time
+              description: The last update timestamp of the task
