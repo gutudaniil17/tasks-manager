@@ -14,7 +14,7 @@ A simple RESTful API service for managing tasks.
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/tasks-manager.git
+    git clone https://github.com/gutudaniil17/tasks-manager.git
     cd tasks-manager
     ```
 
