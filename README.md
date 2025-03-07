@@ -32,7 +32,7 @@ Swagger UI is available at `http://localhost:8080/swagger-ui.html`.
 
 ## Deployment Details
 
-The application is deployed at: [Your Deployed App URL]
+The application is deployed at: https://tasks-manager-7tz3.onrender.com
 
 ## API Usage
 
@@ -154,7 +154,7 @@ The application is deployed at: [Your Deployed App URL]
 
 You can import the following Postman collection to simplify testing:
 
-[Postman Collection URL]
+/postman/tasks-manager.postman_collection.json
 
 ## Swagger / OpenAPI Documentation
 
